@@ -82,6 +82,9 @@ def recommend():
     # rendering the string to python string
     for i in range(len(cast_bios)):
         cast_bios[i] = cast_bios[i].replace(r'\n', '\n').replace(r'\"','\"')
+
+    for i in range(len(cast_chars)):
+        cast_chars[i] = cast_chars[i].replace(r'\n', '\n').replace(r'\"','\"') 
     
     # combining multiple lists as a dictionary which can be passed to the html file so that it can be processed easily and the order of information will be preserved
     movie_cards = {rec_posters[i]: [rec_movies[i],rec_movies_org[i]] for i in range(len(rec_posters))}
@@ -107,9 +110,12 @@ def recommend():
             reviews_status.append('Good' if pred else 'Bad')
 
     # getting current date
-    today = str(date.today())
-    curr_date = datetime.strptime(today,'%Y-%m-%d')
-    movie_rel_date = datetime.strptime(rel_date, '%Y-%m-%d')
+    movie_rel_date = ""
+    curr_date = ""
+    if(rel_date):
+        today = str(date.today())
+        curr_date = datetime.strptime(today,'%Y-%m-%d')
+        movie_rel_date = datetime.strptime(rel_date, '%Y-%m-%d')
 
     # combining reviews and comments into a dictionary
     movie_reviews = {reviews_list[i]: reviews_status[i] for i in range(len(reviews_list))}     
