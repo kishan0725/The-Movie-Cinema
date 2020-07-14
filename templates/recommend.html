@@ -79,25 +79,28 @@
     </div>
   </div>
   {% endfor %}
-  
-  <div class="movie" style="color: #E8E8E8;">
-      <center>
-    <h3>TOP CAST</h3>
-    <h5>(Click on the cast to know more)</h5>
-  </center>
-  </div>
 
-  <div class="movie-content">
-      {% for name, details in casts.items() if not casts.hidden %}
-        <div class="castcard card" style="width: 16rem;" title="Click to know more about {{name}}" data-toggle="modal" data-target="#{{details[0]}}">
-          <img class="card-img-top" id="{{details[0]}}" height="360" width="240" alt="{{name}} - profile" src="{{details[2]}}">
-          <div class="card-body">
-            <h5 class="card-title">{{name|title}}</h5>
-            <h5 class="card-title"><span style="color:#756969;font-size: 20px;">Character: {{details[1]|title}}</span></h5>
-          </div>
-        </div>
-    {% endfor %}
+  {% if casts|length > 1 %}
+    <div class="movie" style="color: #E8E8E8;">
+        <center>
+      <h3>TOP CAST</h3>
+      <h5>(Click on the cast to know more)</h5>
+    </center>
     </div>
+
+    
+    <div class="movie-content">
+        {% for name, details in casts.items() if not casts.hidden %}
+          <div class="castcard card" style="width: 15rem;" title="Click to know more about {{name}}" data-toggle="modal" data-target="#{{details[0]}}">
+            <img class="card-img-top" id="{{details[0]}}" height="360" width="240" alt="{{name}} - profile" src="{{details[2]}}">
+            <div class="card-body">
+              <h5 class="card-title">{{name|title}}</h5>
+              <h5 class="card-title"><span style="color:#756969;font-size: 20px;">Character: {{details[1]|title}}</span></h5>
+            </div>
+          </div>
+      {% endfor %}
+    </div>
+  {% endif %}
 
   <center>
     {% if reviews %}
@@ -129,14 +132,20 @@
     		</tbody>
  		 </table>
     </div>
-    {% elif curr_date < movie_rel_date %}
-    <div style="color:white;">
-      <h1 style="color:white"> This movie is not released yet. Stay tuned! </h1>
-    </div>
+    {% if (curr_date) and (movie_rel_date) %}
+      {% elif curr_date < movie_rel_date %}
+      <div style="color:white;">
+        <h1 style="color:white"> This movie is not released yet. Stay tuned! </h1>
+      </div>
+      {% else %}
+      <div style="color:white;">
+        <h1 style="color:white"> Sorry, the reviews for this movie are not available! :( </h1>
+      </div>
+      {% endif %}
     {% else %}
-    <div style="color:white;">
-      <h1 style="color:white"> Sorry, the reviews for this movie is not available! :( </h1>
-    </div>
+      <div style="color:white;">
+        <h1 style="color:white"> Sorry, the reviews for this movie are not available! :( </h1>
+      </div>
     {% endif %}
   </center>
 
@@ -149,7 +158,7 @@
 
     <div class="movie-content">
       {% for poster, details in movie_cards.items() if not movie_cards.hidden %}
-        <div class="card" style="width: 16rem;" title="{{details[1]}}" onclick="recommendcard(this)">
+        <div class="card" style="width: 15rem;" title="{{details[1]}}" onclick="recommendcard(this)">
           <img class="card-img-top" height="360" width="240" alt="{{details[0]}} - poster" src={{poster}}>
           <div class="card-body">
             <h5 class="card-title">{{details[0]}}</h5>
