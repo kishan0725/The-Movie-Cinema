@@ -13,7 +13,7 @@ Check out the live demo: https://the-movie-cinema.herokuapp.com/
 
 ## Note
 
-Don't worry if the movie that you are looking for is not auto-suggested. Just type the movie name and click on "enter". You will be good to go eventhough if you made some typo errors.
+Don't worry if the movie that you are looking for is not auto-suggested. Just type the movie name and click on "enter". You will be good to go even though if you made some typo errors.
 
 ## How to get the API key?
 
