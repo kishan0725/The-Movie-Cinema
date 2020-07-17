@@ -15,11 +15,20 @@
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
   <!-- Auto Complete -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/css/autoComplete.min.css">
+
+  <!-- External CSS -->
   <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
+
   <script type="text/javascript">
     var films = {{suggestions|tojson}};
+    $(document).ready(function(){
+      $("#myModal").modal('show');
+    });
   </script>
 
 </head>
@@ -65,13 +74,33 @@
     </center>
 	</div>
 	
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #e50914;color: white;">
+          <h5 class="modal-title" id="exampleModalLabel3">Hey there!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" style="color: white">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Don't worry if the movie that you are looking for is not auto-suggested while typing. Just type the movie name and click on "enter". You will be good to go even though if you made some typo errors.</p>
+        </div>
+        <div class="modal-footer" style="text-align: center;">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Let's go!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+	
 	<div class="footer" style="">Made with<span style="font-size:150%;color:red;"> &hearts; </span>by Kishan</div>
 	
 	<script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/js/autoComplete.min.js"></script>
   <script type="text/javascript" src="{{url_for('static', filename='autocomplete.js')}}"></script>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script type="text/javascript" src="{{url_for('static', filename='recommend.js')}}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 </body>
 </html>
