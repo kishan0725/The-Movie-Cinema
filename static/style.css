@@ -8,7 +8,7 @@
 .movie-content {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content:space-around;
+	justify-content:center;
 }
 
 .movie-content > div {
