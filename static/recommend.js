@@ -237,8 +237,18 @@ function get_individual_cast(movie_cast,my_api_key) {
         async:false,
         success: function(cast_details){
           cast_bdays.push((new Date(cast_details.birthday)).toDateString().split(' ').slice(1).join(' '));
-          cast_bios.push(cast_details.biography);
-          cast_places.push(cast_details.place_of_birth);
+          if(cast_details.biography){
+            cast_bios.push(cast_details.biography);
+          }
+          else {
+            cast_bios.push("Not Available");
+          }
+          if(cast_details.place_of_birth){
+            cast_places.push(cast_details.place_of_birth);
+          }
+          else {
+            cast_places.push("Not Available");
+          }
         }
       });
     }
