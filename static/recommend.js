@@ -84,8 +84,8 @@ function load_details(my_api_key,title){
         get_movie_details(movie_id,my_api_key,movie_title,movie_title_org);
       }
     },
-    error: function(){
-      alert('Invalid Request');
+    error: function(error){
+      alert('Invalid Request - '+error);
       $("#loader").delay(500).fadeOut();
     },
   });
@@ -141,8 +141,8 @@ function get_movie_details(movie_id,my_api_key,movie_title,movie_title_org) {
     success: function(movie_details){
       show_details(movie_details,movie_title,my_api_key,movie_id,movie_title_org);
     },
-    error: function(){
-      alert("API Error!");
+    error: function(error){
+      alert("API Error! - "+error);
       $("#loader").delay(500).fadeOut();
     },
   });
@@ -204,7 +204,9 @@ function show_details(movie_details,movie_title,my_api_key,movie_id,movie_title_
       'status':status,
       'rec_movies':JSON.stringify(recommendations.rec_movies),
       'rec_posters':JSON.stringify(recommendations.rec_posters),
-      'rec_movies_org':JSON.stringify(recommendations.rec_movies_org)
+      'rec_movies_org':JSON.stringify(recommendations.rec_movies_org),
+      'rec_year':JSON.stringify(recommendations.rec_year),
+      'rec_vote':JSON.stringify(recommendations.rec_vote)
   }
 
   $.ajax({
@@ -275,8 +277,8 @@ function get_movie_cast(movie_id,my_api_key){
           }
         }
       },
-      error: function(){
-        alert("Invalid Request!");
+      error: function(error){
+        alert("Invalid Request! - "+error);
         $("#loader").delay(500).fadeOut();
       }
     });
@@ -289,7 +291,9 @@ function get_movie_cast(movie_id,my_api_key){
     rec_movies = [];
     rec_posters = [];
     rec_movies_org = [];
-
+    rec_year = [];
+    rec_vote = [];
+    
     $.ajax({
       type: 'GET',
       url: "https://api.themoviedb.org/3/movie/"+movie_id+"/recommendations?api_key="+my_api_key,
@@ -298,6 +302,8 @@ function get_movie_cast(movie_id,my_api_key){
         for(var recs in recommend.results) {
           rec_movies.push(recommend.results[recs].title);
           rec_movies_org.push(recommend.results[recs].original_title);
+          rec_year.push(new Date(recommend.results[recs].release_date).getFullYear());
+          rec_vote.push(recommend.results[recs].vote_average);
           if(recommend.results[recs].poster_path){
             rec_posters.push("https://image.tmdb.org/t/p/original"+recommend.results[recs].poster_path);
           }
@@ -306,10 +312,10 @@ function get_movie_cast(movie_id,my_api_key){
           }
         }
       },
-      error: function() {
-        alert("Invalid Request!");
+      error: function(error) {
+        alert("Invalid Request! - "+error);
         $("#loader").delay(500).fadeOut();
       }
     });
-    return {rec_movies:rec_movies,rec_movies_org:rec_movies_org,rec_posters:rec_posters};
+    return {rec_movies:rec_movies,rec_movies_org:rec_movies_org,rec_posters:rec_posters,rec_year:rec_year,rec_vote:rec_vote};
   }
