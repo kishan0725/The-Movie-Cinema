@@ -9,6 +9,7 @@
 	<!-- Google Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300&display=swap" rel="stylesheet">
 
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -21,14 +22,15 @@
 </head>
 
 <body id="content">
+
 	<div class="results">
 	    <center>
-	      <h2 id="name" class="text-uppercase">{{title}}</h2>
+	      <h2 id="name" class="text-uppercase" style="font-family: 'Rowdies', cursive;">{{title}}</h2>
 	    </center>
 	</div>
-	<br>
+	<br/>
 
-<div id="mycontent">
+  <div id="mycontent">
     <div id="mcontent">
       <div class="poster-lg">
         <img class="poster" style="border-radius: 40px;margin-left: 90px;" height="400" width="250" src={{poster}}>
@@ -47,8 +49,8 @@
         <h6 id="status" style="color:white;">STATUS: &nbsp;{{status}}</h6>
       </div>
     </div>
-</div>
-<br/>
+  </div>  
+  <br/>
 	
 {% for name, details in cast_details.items() if not cast_details.hidden %}
   <div class="modal fade" id="{{details[0]}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3" aria-hidden="true">
@@ -80,62 +82,68 @@
   </div>
   {% endfor %}
 
-  {% if casts|length > 1 %}
-  <div class="movie" style="color: #E8E8E8;">
-    	<center>
-		<h3>TOP CAST</h3>
-		<h5>(Click on the cast to know more)</h5>
-	</center>
-  </div>
+  <div class="container"> 
 
-  <div class="movie-content">
+    {% if casts|length > 1 %}
+      <div class="movie" style="color: #E8E8E8;">
+        <center>
+          <h2 style="font-family: 'Rowdies', cursive;">TOP CAST</h2>
+          <h5>(Click on the cast to know more)</h5>
+        </center>
+      </div>
+
+    
+      <div class="movie-content">
         {% for name, details in casts.items() if not casts.hidden %}
-          <div class="castcard card" style="width: 15rem;" title="Click to know more about {{name}}" data-toggle="modal" data-target="#{{details[0]}}">
+          <div class="castcard card" style="width: 14rem;" title="Click to know more about {{name}}" data-toggle="modal" data-target="#{{details[0]}}">
             <div class="imghvr">
               <img class="card-img-top cast-img" id="{{details[0]}}" height="360" width="240" alt="{{name}} - profile" src="{{details[2]}}">
               <figcaption class="fig">
                 <button class="card-btn btn btn-danger"> Know More </button>
               </figcaption>
             </div>
-            <div class="card-body">
-              <h5 class="card-title">{{name|title}}</h5>
-              <h5 class="card-title"><span style="color:#756969;font-size: 20px;">Character: {{details[1]|title}}</span></h5>
+            <div class="card-body" style="font-family: 'Rowdies', cursive;font-size: 18px;">
+              <h5 class="card-title">{{name|upper}}</h5>
+              <h5 class="card-title" style="font-size: 18px"><span style="color:#756969;font-size: 18px;">AS {{details[1]|upper}}</span></h5>
             </div>
           </div>
-      {% endfor %}
-    </div>
-{% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+    <br/>
 
   <center>
     {% if reviews %}
-    <h2 style="color:white">USER REVIEWS</h2>
+    <h2 style="font-family: 'Rowdies', cursive;color:white">USER REVIEWS</h2>
      <div class="col-md-12" style="margin: 0 auto; margin-top:25px;">
         <table class="table table-bordered" bordercolor="white" style="color:white">
             <thead>
                 <tr>
-                    <th class="text-center" scope="col" style="width: 75%">Comments</th>
-                    <th class="text-center" scope="col">Sentiments</th>
+                  <th class="text-center" scope="col" style="width: 75%">Comments</th>
+                  <th class="text-center" scope="col">Sentiments</th>
                 </tr>
             </thead>
     
-            <tbody>
-		      {% for review, status in reviews.items() if not reviews.hidden %}
-		      <tr style="background-color:#e5091485;">
-              	  <td>{{review}}</td>
-	              <td><center>
-	                  {{status}} : 
-	                  {% if status =='Good' %}
-	                    &#128515;
-	                  {% else %}
-	                    &#128534;
-	                  {% endif %}
-	                </center>
-	              </td>
-          		</tr>
-      			{% endfor %}
-    		</tbody>
- 		 </table>
-    </div>
+          <tbody>
+	    {% for review, status in reviews.items() if not reviews.hidden %}
+    	        <tr style="background-color:#e5091485;">
+                <td>{{review}}</td>
+                <td>
+                  <center>
+                    {{status}} : 
+                    {% if status =='Positive' %}
+                      &#128515;
+                    {% else %}
+                      &#128534;
+                    {% endif %}
+                  </center>
+                </td>
+            	</tr>
+      	    {% endfor %}
+    		  </tbody>
+ 		    </table>
+     </div>
+
     {% if (curr_date) and (movie_rel_date) %}
       {% elif curr_date < movie_rel_date %}
       <div style="color:white;">
@@ -152,40 +160,43 @@
       </div>
     {% endif %}
   </center>
-
-  {% if movie_cards|length > 1 %}
-
+  <br/>
+   
+ 
+    {% if movie_cards|length > 1 %}
 
       <div class="movie" style="color: #E8E8E8;">
-      <center><h3>RECOMMENDED MOVIES FOR YOU</h3><h5>(Click any of the movies to get recommendation)</h5></center>
-    </div>
+        <center><h2 style="font-family: 'Rowdies', cursive;">RECOMMENDED MOVIES FOR YOU</h2><h5>(Click any of the movies to get recommendation)</h5></center>
+      </div>
 
-    <div class="movie-content">
-      {% for poster, details in movie_cards.items() if not movie_cards.hidden %}
-        <div class="card" style="width: 15rem;" title="{{details[1]}}" onclick="recommendcard(this)">
-          <div class="imghvr">
-            <img class="card-img-top" height="360" width="240" alt="{{details[0]}} - poster" src={{poster}}>
-            <figcaption class="fig">
-              <button class="card-btn btn btn-danger"> Click Me </button>
-            </figcaption>
-           </div>
-          <div class="card-body">
-            <h5 class="card-title">{{details[0]}}</h5>
+      <div class="movie-content">
+        {% for poster, details in movie_cards.items() if not movie_cards.hidden %}
+          <div class="card" style="width: 14rem;" title="{{details[1]}}" onclick="recommendcard(this)">
+            <div class="imghvr">
+              <img class="card-img-top" height="360" width="240" alt="{{details[0]}} - poster" src={{poster}}>
+              <div class="card-img-overlay" >
+                <span class="card-text" style="font-size:15px;background: #000000b8;color:white;padding:2px 5px;border-radius: 10px;"><span class="fa fa-star checked">&nbsp; {{details[2]}}/10</span></span>
+              </div>
+              <div class=".card-img-overlay" style="position: relative;">
+                <span class="card-text" style="font-size:15px;position:absolute;bottom:20px;left:15px;background: #000000b8;color:white;padding: 5px;border-radius: 10px;">{{details[3]}}</span>
+              </div>
+              <figcaption class="fig">
+                <button class="card-btn btn btn-danger"> Click Me </button>
+              </figcaption>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title" style="font-family: 'Rowdies', cursive;font-size: 17px;">{{details[0]|upper}}</h5>
+            </div>
           </div>
-        </div>
-    {% endfor %}
-    </div>
-
+        {% endfor %}
+      </div>
     {% endif %}
-
-
-    
-    </div>
   </div>
-  
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script type="text/javascript" src="{{url_for('static', filename='recommend.js')}}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 </body>
 </html>
