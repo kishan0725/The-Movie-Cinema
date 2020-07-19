@@ -22,6 +22,13 @@ def convert_to_list(my_list):
     my_list[-1] = my_list[-1].replace('"]','')
     return my_list
 
+# convert list of numbers to list (eg. "[1,2,3]" to [1,2,3])
+def convert_to_list_num(my_list):
+    my_list = my_list.split(',')
+    my_list[0] = my_list[0].replace("[","")
+    my_list[-1] = my_list[-1].replace("]","")
+    return my_list
+
 def get_suggestions():
     data = pd.read_csv('main_data.csv')
     return list(data['movie_title'].str.capitalize())
@@ -59,6 +66,8 @@ def recommend():
     rec_movies = request.form['rec_movies']
     rec_posters = request.form['rec_posters']
     rec_movies_org = request.form['rec_movies_org']
+    rec_year = request.form['rec_year']
+    rec_vote = request.form['rec_vote']
 
     # get movie suggestions for auto complete
     suggestions = get_suggestions()
@@ -75,9 +84,9 @@ def recommend():
     cast_places = convert_to_list(cast_places)
     
     # convert string to list (eg. "[1,2,3]" to [1,2,3])
-    cast_ids = cast_ids.split(',')
-    cast_ids[0] = cast_ids[0].replace("[","")
-    cast_ids[-1] = cast_ids[-1].replace("]","")
+    cast_ids = convert_to_list_num(cast_ids)
+    rec_vote = convert_to_list_num(rec_vote)
+    rec_year = convert_to_list_num(rec_year)
     
     # rendering the string to python string
     for i in range(len(cast_bios)):
@@ -87,7 +96,7 @@ def recommend():
         cast_chars[i] = cast_chars[i].replace(r'\n', '\n').replace(r'\"','\"') 
     
     # combining multiple lists as a dictionary which can be passed to the html file so that it can be processed easily and the order of information will be preserved
-    movie_cards = {rec_posters[i]: [rec_movies[i],rec_movies_org[i]] for i in range(len(rec_posters))}
+    movie_cards = {rec_posters[i]: [rec_movies[i],rec_movies_org[i],rec_vote[i],rec_year[i]] for i in range(len(rec_posters))}
 
     casts = {cast_names[i]:[cast_ids[i], cast_chars[i], cast_profiles[i]] for i in range(len(cast_profiles))}
 
@@ -107,7 +116,7 @@ def recommend():
             movie_review_list = np.array([reviews.string])
             movie_vector = vectorizer.transform(movie_review_list)
             pred = clf.predict(movie_vector)
-            reviews_status.append('Good' if pred else 'Bad')
+            reviews_status.append('Positive' if pred else 'Negative')
 
     # getting current date
     movie_rel_date = ""
