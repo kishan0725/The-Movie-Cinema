@@ -5,7 +5,6 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  /*box-shadow: inset 0 0 5px #00000000; */
   border-radius: 10px;
 }
  
@@ -55,13 +54,22 @@
 	margin-left: 50px;
 }
 
+.body-content {
+	position: relative;
+  	min-height: 100%;
+}
+
 .footer {
 	color: #e4e0e0;
-	text-align:right;
+	background-color: #e50914d1;
+	text-align:center;
 	position: fixed;
- 	bottom: 20px;
- 	right: 20px;
+	bottom: 0;
  	width: 100%;
+}
+
+.social-icons {
+	margin-left: 15px;
 }
 
 h1 {
