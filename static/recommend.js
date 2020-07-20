@@ -220,6 +220,7 @@ function show_details(movie_details,movie_title,my_api_key,movie_id,movie_title_
     success: function(response) {
       $('.results').html(response);
       $('#autoComplete').val('');
+      $('.footer').css('position','absolute');
       $(window).scrollTop(0);
     }
   });
