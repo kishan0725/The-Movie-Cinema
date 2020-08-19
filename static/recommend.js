@@ -1,5 +1,5 @@
 $(function() {
-  // Button will be disabled until we type anything inside the input field
+  // Button will be disabled until we type something inside the input field
   const source = document.getElementById('autoComplete');
   const inputHandler = function(e) {
     if(e.target.value==""){
@@ -24,7 +24,7 @@ $(function() {
   });
 });
 
-// will be invoked when clicking on the recommended movies
+// will be invoked when clicking on the recommended movie cards
 function recommendcard(e){
   $("#loader").fadeIn();
   var my_api_key = 'YOUR_API_KEY';
@@ -33,7 +33,7 @@ function recommendcard(e){
 }
 
 
-// get the basic details of the movie from the API (based on the name of the movie)
+// get the details of the movie from the API (based on the name of the movie)
 function load_details(my_api_key,title){
   $.ajax({
     type: 'GET',
@@ -177,10 +177,13 @@ function show_details(movie_details,movie_title,my_api_key,movie_id,movie_title_
     runtime = Math.floor(runtime/60)+" hour(s) "+(runtime%60)+" min(s)"
   }
 
+  // calling `get_movie_cast` to get the top cast for the queried movie
   movie_cast = get_movie_cast(movie_id,my_api_key);
   
+  // calling `get_individual_cast` to get the individual cast details
   ind_cast = get_individual_cast(movie_cast,my_api_key);
 
+  // calling `get_recommendations` to get the recommended movies for the given movie id from the TMDB API
   recommendations = get_recommendations(movie_id, my_api_key);
   
   details = {
@@ -226,7 +229,7 @@ function show_details(movie_details,movie_title,my_api_key,movie_id,movie_title_
   });
 }
 
-// get the details of individual cast
+// getting the details of individual cast
 function get_individual_cast(movie_cast,my_api_key) {
     cast_bdays = [];
     cast_bios = [];
