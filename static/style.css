@@ -84,6 +84,21 @@ h1 {
   	animation: octocat-wave 560ms ease-in-out;
 }
 
+.fa-arrow-up {
+	font-size: 1.5em;
+	color: #ffffff;
+    background: #e50914;
+    padding: 10px;
+	border-radius: 50%;
+	float: right;
+    bottom: 25px;
+    position: relative;
+}
+
+.fa-arrow-up:hover {
+	cursor: pointer;
+}
+
 @keyframes octocat-wave {
   0%,
   100% {
@@ -153,6 +168,17 @@ h6 {
 	svg[data-toggle=tooltip] {
 		width: 50px;
 		height: 50px;
+	}
+
+	.fa-arrow-up{
+		font-size: 1em;
+		color: #ffffff;
+		background: #e50914;
+		padding: 10px;
+		border-radius: 50%;
+		float: right;
+		bottom: 10px;
+		position: relative;
 	}
 }
 

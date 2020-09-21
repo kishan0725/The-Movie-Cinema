@@ -11,6 +11,10 @@ $(function() {
   }
   source.addEventListener('input', inputHandler);
 
+  $('.fa-arrow-up').click(function(){
+    $('html, body').animate({scrollTop:0}, 'slow');
+  });
+
   $('.movie-button').on('click',function(){
     var my_api_key = 'YOUR_API_KEY';
     var title = $('.movie').val();
@@ -229,6 +233,9 @@ function show_details(movie_details,movie_title,my_api_key,movie_id,movie_title_
       $('.results').html(response);
       $('#autoComplete').val('');
       $('.footer').css('position','absolute');
+      if ($('.movie-content')) {
+        $('.movie-content').after('<div class="gototop"><i title="Go to Top" class="fa fa-arrow-up"></i></div>');
+      }
       $(window).scrollTop(0);
     }
   });
