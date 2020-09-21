@@ -99,6 +99,10 @@ h1 {
 	cursor: pointer;
 }
 
+.app-title:hover {
+	cursor: pointer;
+}
+
 @keyframes octocat-wave {
   0%,
   100% {

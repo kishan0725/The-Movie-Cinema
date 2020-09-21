@@ -15,6 +15,10 @@ $(function() {
     $('html, body').animate({scrollTop:0}, 'slow');
   });
 
+  $('.app-title').click(function(){
+    window.location.href = '/';
+  })
+
   $('.movie-button').on('click',function(){
     var my_api_key = 'YOUR_API_KEY';
     var title = $('.movie').val();
