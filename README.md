@@ -19,7 +19,7 @@ Don't worry if the movie that you are looking for is not auto-suggested. Just ty
 
 ## How to get the API key?
 
-Create an account in https://www.themoviedb.org/, click on the `API` link from the left hand sidebar in your account settings and fill all the details to apply for API key. You will see the API key in your `API` sidebar once your request is approved.
+Create an account in https://www.themoviedb.org/, click on the `API` link from the left hand sidebar in your account settings and fill all the details to apply for API key. If you are asked to give a URL for the website, just give "NA" if you don't have one. You will see the API key in your `API` sidebar once your request is approved.
 
 ## How to run the project?
 
