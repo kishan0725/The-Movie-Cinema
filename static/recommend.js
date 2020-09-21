@@ -18,6 +18,11 @@ $(function() {
       $('.results').css('display','none');
       $('.fail').css('display','block');
     }
+
+    if (($('.fail').text() && ($('.footer').css('position') == 'absolute'))) {
+      $('.footer').css('position', 'fixed');
+    }
+
     else{
       load_details(my_api_key,title);
     }
