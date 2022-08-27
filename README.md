@@ -11,7 +11,7 @@ The details of the movies(title, genre, runtime, rating, poster, etc) are fetche
 
 ## Link to the application
 
-Check out the live demo: https://the-movie-cinema.herokuapp.com/
+Check out the live demo: http://themoviecinema-env.eba-mpiuximk.us-east-1.elasticbeanstalk.com/
 
 # Note
 
