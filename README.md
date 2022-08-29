@@ -11,7 +11,7 @@ The details of the movies(title, genre, runtime, rating, poster, etc) are fetche
 
 ## Link to the application
 
-Check out the live demo: http://themoviecinema-env.eba-mpiuximk.us-east-1.elasticbeanstalk.com/
+Check out the live demo: https://tmc.kishanlal.dev/
 
 Don't worry if the movie that you are looking for is not auto-suggested. Just type the movie name and click on "enter". You will be good to go even though if you made some typo errors.
 
