@@ -23,6 +23,8 @@
 
 <body id="content">
 
+  {% if title|length %}
+
 	<div class="results">
 	    <center>
 	      <h2 id="name" class="text-uppercase" style="font-family: 'Rowdies', cursive;">{{title}}</h2>
@@ -171,7 +173,7 @@
 
       <div class="movie-content">
         {% for poster, details in movie_cards.items() if not movie_cards.hidden %}
-          <div class="card" style="width: 14rem;" title="{{details[1]}}" onclick="recommendcard(this)">
+          <div class="card" style="width: 14rem;" title="{{details[1]}}" onclick="recommendcard({{details[4]}})">
             <div class="imghvr">
               <img class="card-img-top" height="360" width="240" alt="{{details[0]}} - poster" src={{poster}}>
               <div class="card-img-overlay" >
@@ -193,6 +195,38 @@
     {% endif %}
 <br/><br/><br/><br/>
   </div>
+
+  {% else %}
+  {% if movie_cards|length > 1 %}
+    <div class="container"> 
+      <div class="movie" style="color: #E8E8E8;">
+        <center><h2 style="font-family: 'Rowdies', cursive;">Multiple matches found</h5></center>
+      </div>
+
+      <div class="movie-content">
+        {% for poster, details in movie_cards.items() if not movie_cards.hidden %}
+          <div class="card" style="width: 14rem;" title="{{details[1]}}" onclick="recommendcard({{details[4]}})">
+            <div class="imghvr">
+              <img class="card-img-top" height="360" width="240" alt="{{details[0]}} - poster" src={{poster}}>
+              <div class="card-img-overlay" >
+                <span class="card-text" style="font-size:15px;background: #000000b8;color:white;padding:2px 5px;border-radius: 10px;"><span class="fa fa-star checked">&nbsp; {{details[2]}}/10</span></span>
+              </div>
+              <div class=".card-img-overlay" style="position: relative;">
+                <span class="card-text" style="font-size:15px;position:absolute;bottom:20px;left:15px;background: #000000b8;color:white;padding: 5px;border-radius: 10px;">{{details[3]}}</span>
+              </div>
+              <figcaption class="fig">
+                <button class="card-btn btn btn-danger"> Click Me </button>
+              </figcaption>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title" style="font-family: 'Rowdies', cursive;font-size: 17px;">{{details[0]|upper}}</h5>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      </div>
+    {% endif %}
+  {% endif %}
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script type="text/javascript" src="{{url_for('static', filename='recommend.js')}}"></script>

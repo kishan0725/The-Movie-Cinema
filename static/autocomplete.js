@@ -9,7 +9,7 @@ new autoComplete({
     resultsList: {                       // Rendered results list object      | (Optional)
         render: true,
         container: source => {
-            source.setAttribute("id", "food_list");
+            source.setAttribute("id", "movie_list");
         },
         destination: document.querySelector("#autoComplete"),
         position: "afterend",
