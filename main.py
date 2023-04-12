@@ -33,15 +33,15 @@ def get_suggestions():
     data = pd.read_csv('main_data.csv')
     return list(data['movie_title'].str.capitalize())
 
-application = Flask(__name__)
+app = Flask(__name__)
 
-@application.route("/")
-@application.route("/home")
+@app.route("/")
+@app.route("/home")
 def home():
     suggestions = get_suggestions()
     return render_template('home.html',suggestions=suggestions)
 
-@application.route("/populate-matches",methods=["POST"])
+@app.route("/populate-matches",methods=["POST"])
 def populate_matches():
     # getting data from AJAX request
     res = json.loads(request.get_data("data"));
@@ -53,7 +53,7 @@ def populate_matches():
 
 
 
-@application.route("/recommend",methods=["POST"])
+@app.route("/recommend",methods=["POST"])
 def recommend():
     # getting data from AJAX request
     title = request.form['title']
@@ -153,4 +153,4 @@ def recommend():
 
 
 if __name__ == '__main__':
-    application.run(debug=True)
+    app.run(debug=True)
