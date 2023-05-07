@@ -1,3 +1,5 @@
+// Replace 'YOUR_API_KEY' below with your API key retrieved from https://www.themoviedb.org
+var myAPI = 'YOUR_API_KEY'  // global string to be consistent with future usages elsewhere
 $(function() {
   $('#movie_list').css('display','none');
   $('#autoComplete').blur(function() {
@@ -25,7 +27,7 @@ $(function() {
   })
 
   $('.movie-button').on('click',function(){
-    var my_api_key = 'YOUR_API_KEY';
+    var my_api_key = myAPI;
     var title = $('.movie').val();
     $('#movie_list').css('display','none');
     if (title=="") {
@@ -46,7 +48,7 @@ $(function() {
 // will be invoked when clicking on the recommended movie cards
 function recommendcard(id){
   $("#loader").fadeIn();
-  var my_api_key = 'YOUR_API_KEY';
+  var my_api_key = myAPI;
   // var title = e.getAttribute('title'); 
   load_details(my_api_key,id,false);
 }
